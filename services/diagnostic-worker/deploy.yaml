@@ -1,0 +1,36 @@
+---
+version: "2.0"
+services:
+  worker:
+    # Digest-pinned for reproducibility (not :latest). Re-pin after each push:
+    #   docker manifest inspect -v da0t/vigil-diagnostic-worker:latest \
+    #     | jq -r '.Descriptor.digest'
+    # The lease URL Akash assigns is NOT committed here — it is passed to the
+    # agent at runtime as WORKER_URL.
+    image: da0t/vigil-diagnostic-worker@sha256:0d782ad5a668209070622ca03d40b09257a0c8b687d46e8ae74e2bc900a1e1c1
+    expose:
+      - port: 4400
+        as: 80
+        to:
+          - global: true
+profiles:
+  compute:
+    worker:
+      resources:
+        cpu:
+          units: 0.5
+        memory:
+          size: 512Mi
+        storage:
+          size: 512Mi
+  placement:
+    akash:
+      pricing:
+        worker:
+          denom: uakt
+          amount: 10000
+deployment:
+  worker:
+    akash:
+      profile: worker
+      count: 1
