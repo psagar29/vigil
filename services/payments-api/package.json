@@ -1,0 +1,26 @@
+{
+  "name": "payments-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Vigil mock prod service — a payments API that really breaks",
+  "author": "Pranav Sagar",
+  "license": "MIT",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "dev": "tsx watch src/index.ts"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "tsx": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=20 <21"
+  }
+}
